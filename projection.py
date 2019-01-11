@@ -6,8 +6,7 @@ from math import *
 
 
 class Camera:
-	"""pos je 3d array za pozicijo, rot za rotacijo v stopinjah"""
-	
+	"""rot is given in degrees, ez display[2] controls field of view."""
 	def __init__(self, pos, rot, display):
 		self.x = pos[0]
 		self.y = pos[1]
@@ -20,15 +19,16 @@ class Camera:
 		self.ez = display[2]
 
 	def projection(self, point):
-		"""
-		Prestavi in obrne 3d vektor relativno na kamero in ga preslika v 2d.
-		a = vektor tocke - vektor kamere
-		r = vektor obračanja
-		w, v, u = matrike obračanja
-		b = 2d vektor točke
+		"""Returns input vector relative to the camera, projected onto 2d plane.
+		a = input vector - camera vector
+		r = rotation vector
+		w, v, u = rotation matrices for z, y and x axis respectively
+		b = 2d output vector
 		"""
 		a = np.array(point)-np.array([self.x, self.y, self.z])
 		r = np.array([self.psi, self.theta, self.phi])
+		# u, v and w are transposed, because it is easier to describe matrix
+		# as a collection of basis vectors.
 		u = np.array([[1,0,0], [0,cos(r[0]),-sin(r[0])], [0,sin(r[0]),cos(r[0])]]).T
 		v = np.array([[cos(r[1]),0,sin(r[1])], [0, 1, 0], [-sin(r[1]),0,cos(r[1])]]).T
 		w = np.array([[cos(r[2]),-sin(r[2]),0], [sin(r[2]),cos(r[2]),0], [0,0,1]]).T
