@@ -38,8 +38,8 @@ speed=1.5
 while True:
 	sleep(0.01)
 	camera1.phi = -speed*clock()+pi
-	camera1.x = sin(speed*clock())*5
-	camera1.y = -cos(speed*clock())*5
+	camera1.x = sin(speed*clock())*50/clock()#NEKI NE DELA???
+	camera1.y = -cos(speed*clock())*50/clock()
 	#camera1.phi = sin(speed*clock())*0.1
 	#camera1.y = -cos(speed*clock())*5
 	#for i in range(8):
