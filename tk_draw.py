@@ -61,3 +61,4 @@ while True:
 		[2,6],[7,3],[7,6],[7,5],[4,6],[4,5]]:
 		draw_line(w, dots[j[0]], dots[j[1]], "black")
 	master.update()
+	
