@@ -10,7 +10,7 @@ def mag(vector): # returns magnitude
 
 class Camera:
 	"""rot is given in degrees, ez display[2] controls field of view."""
-	
+
 	def __init__(self, pos, rot, display):
 		self.x = pos[0]
 		self.y = pos[1]
@@ -44,14 +44,9 @@ class Camera:
 		a = input vector - camera vector
 		b = 2d output vector
 		"""
-		a = translate(point)
-		d = np.append(self.rotate(a), [1])
-		e = np.array([[1,0,0,0],
-			[0,1,0,0],
-			[-self.ex/self.ez, -self.ey/self.ez, 1, -1/self.ez],
-			[0,0,0,1]]).transpose()
-		f = d.dot(e)
-		b = np.array([f[0]/f[3],f[1]/f[3]])
+		a = self.translate(point)
+		d = self.rotate(a)
+		b = np.array([self.ez*d[0]/d[2], -self.ez*d[1]/d[2]])
 		return b
 
 	def normal(self, normal):
