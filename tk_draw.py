@@ -24,7 +24,7 @@ def draw_line(canvas, point1, point2, colour):
 def draw_face(canvas, face):
         draw_line(canvas)
 
-camera1 = projection.Camera([0, 6, 3], [80, 0, 0], [0, 0, 200])
+camera1 = projection.Camera([10, 10, 8], [50, 0, 0], [0, 0, 20])
 points = [[1,1,1], [1,1,-1], [1,-1,1], [1,-1,-1], [-1,1,1], [-1,1,-1], [-1,-1,1], [-1,-1,-1]]
 
 
@@ -35,17 +35,12 @@ w.pack()
 speed=1.5
 
 
+
 while True:
 	sleep(0.01)
 	camera1.phi = -speed*clock()+pi
-	camera1.x = sin(speed*clock())*50/clock()#NEKI NE DELA???
-	camera1.y = -cos(speed*clock())*50/clock()
-	#camera1.phi = sin(speed*clock())*0.1
-	#camera1.y = -cos(speed*clock())*5
-	#for i in range(8):
-	#	points[i]=np.array([points[i]]).dot(
-	#		np.array([[cos(speed),-sin(speed),0],
-	#                          [sin(speed),cos(speed),0],[0, 0, 1]]).T)
+	camera1.x = sin(speed*clock())*10
+	camera1.y = -cos(speed*clock())*10
 
 	w.delete("all")
 	dots=[]
@@ -61,4 +56,3 @@ while True:
 		[2,6],[7,3],[7,6],[7,5],[4,6],[4,5]]:
 		draw_line(w, dots[j[0]], dots[j[1]], "black")
 	master.update()
-	
