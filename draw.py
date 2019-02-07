@@ -19,8 +19,8 @@ def project_line(camera, point1, point2):
 	return (tmp[0][0]+960, tmp[0][1]+540, tmp[1][0]+960, tmp[1][1]+540)
 
 def draw_face(camera, face):
-	
 
+#nov komentar
 camera1 = projection.Camera([25, -25, 10], [75, 0, 225], [0, 0, 40])
 camera1.update()
 
