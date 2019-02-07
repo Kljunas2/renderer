@@ -32,7 +32,7 @@ def draw_face(canvas, face):
 	normal = camera1.normal(face[3], face[4])
 	if normal > 1:
 		return
-	loop = list(map(camera1.projection, face[:-1]))
+	loop = list(map(camera1.projection, face[:3]))
 	#print(normal)
 	coords = tuple(map(lambda x: 50*x+250, [loop[0][0], loop[0][1], loop[1][0], loop[1][1], loop[2][0], loop[2][1]]))
 	fill = _from_rgb((275-int(normal*240),275-int(normal*240),275-int(normal*240)))
@@ -54,7 +54,7 @@ master = tk.Tk()
 w = tk.Canvas(master, width=500, height=500)
 w.pack()
 
-speed=2
+speed=10
 
 
 
