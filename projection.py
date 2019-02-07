@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import numpy as np
 import math
 
@@ -60,9 +62,9 @@ class Camera:
 		b = np.array([self.ez*d[0]/d[2], -self.ez*d[1]/d[2]])
 		return b
 
-	def normal(self, normal):
+	def normal(self, normal, face):
 		p = np.array(normal).dot(self.r)
-		q = np.array([0, 0, 1])
+		q = np.array(np.array([self.x, self.y, self.z])-face).dot(self.r)
 		return acos(p.dot(q)/(mag(p)*mag(q)))*2/np.pi
 
 
