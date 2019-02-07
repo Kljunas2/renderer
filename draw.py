@@ -1,19 +1,27 @@
-import image
+#!/usr/bin/env python3
 
-height, width = 1920, 1080
+from PIL import ImageDraw, Image
 
-img = image.newimg(height, width)
-pixels = []
-def rect(x1, y1, x2, y2):
-        for i in range(height):
-                for j in range(width):
-                        if i >= y1 and i<= y2 and j >= x1 and j <= x2:
-                                pixels.append((0,0,0,255))
-                        else:
-                                pixels.append((255,255,255,255))
-                print(i)
 
-rect(500, 400, 600, 1000)
-print(pixels)
-img.putdata(pixels)
+import projection
+import stl_parser as parser
+
+
+
+def init(width, height):
+	img = Image.new("RGBA", (width, height))
+	img.putdata([0]*height*width)
+	return img
+
+
+def project_line(camera, point1, point2):
+	return [camera.projection(i) for i in [point1, point2]]
+
+camera1 = projection.Camera([25, -25, 10], [75, 0, 225], [0, 0, 40])
+
+
+img = init(1920, 1080)
+print(project_line(camera1, [1,1,1], [-1,-1,-1]))
+draw = ImageDraw.Draw(img)
+# draw.line(project_line(camera1, [1,1,1], [-1,-1,-1]), fill=(0,255,0,255))
 img.show()

@@ -14,6 +14,7 @@ def circle(array, canvas):
 		50*array[0]+251, 50*array[1]+251,
 		fill= "blue")
 
+
 def project_line(camera, point1, point2):
 	return [camera.projection(i) for i in [point1, point2]]
 
@@ -39,7 +40,7 @@ def draw_face(canvas, face):
 
 
 
-with open("Nova mapa\cube.stl", "r") as f:
+with open("shapes/cube.stl", "r") as f:
 	solid = parser.parse(f.read())
 	print("Parsing done.")
 
@@ -71,7 +72,7 @@ while True:
 	draw_line(w, y[0], y[1], "green")
 	z = project_line(camera1, [0,0,0], [0,0,1])
 	draw_line(w, z[0], z[1], "blue")
-	
+
 
 	for i in solid:
 		draw_face(w, i)
