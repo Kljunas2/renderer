@@ -66,6 +66,8 @@ while True:
 	camera1.y = -cos(speed*clock())*40
 	camera1.update()
 
+	print(camera1.x, camera1.y, camera1.psi, camera1.theta, camera1.phi)
+
 	x = project_line(camera1, [0,0,0], [1,0,0])
 	draw_line(w, x[0], x[1], "red")
 	y = project_line(camera1, [0,0,0], [0,1,0])
