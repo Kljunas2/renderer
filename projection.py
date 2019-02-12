@@ -34,9 +34,9 @@ class Camera:
 		self.x = pos[0]
 		self.y = pos[1]
 		self.z = pos[2]
-		self.psi = math.radians(rot[0]%360)
-		self.theta = math.radians(rot[1]%360)
-		self.phi = math.radians(rot[2]%360)
+		self.psi = math.radians(rot[0] % 360)
+		self.theta = math.radians(rot[1] % 360)
+		self.phi = math.radians(rot[2] % 360)
 		self.ex = display[0]
 		self.ey = display[1]
 		self.ez = display[2]
@@ -48,9 +48,9 @@ class Camera:
 		phi = self.phi
 		# u, v and w are transposed, because it is easier to describe matrix
 		# as a collection of basis vectors.
-		self.r = np.array([[cos(phi),-sin(phi),0], [sin(phi),cos(phi),0], [0,0,1]]).T \
-		.dot(np.array([[cos(theta),0,sin(theta)], [0, 1, 0], [-sin(theta),0,cos(theta)]]).T) \
-		.dot(np.array([[1,0,0], [0,cos(psi),-sin(psi)], [0,sin(psi),cos(psi)]]).T)
+		self.r = np.array([[cos(phi), sin(phi), 0], [-sin(phi), cos(phi), 0], [0, 0, 1]) \
+		.dot(np.array([[cos(theta), 0, -sin(theta)] [0, 1, 0] [sin(theta), 0, cos(theta)]])) \
+		.dot(np.array([[1, 0, 0], [0, cos(psi), sin(psi)], [0, -sin(psi), cos(psi)]]))
 
 	def projection(self, point):
 		"""Returns input vector relative to the camera, projected onto 2d plane.
@@ -75,3 +75,4 @@ class Face:
 	def project(self, camera):
 		for i in self.loop:
 			camera.projection(i)
+
