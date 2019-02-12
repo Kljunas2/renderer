@@ -2,8 +2,8 @@ solid ascii Cube
   facet normal 0.000000e+000 0.000000e+000 -1.000000e+000
     outer loop
       vertex 2.000000e+000 2.000000e+000 -2.000000e+000
-      vertex 2.000000e+000 -2.000000e+000 -2.000000e+000
       vertex -2.000000e+000 2.000000e+000 -2.000000e+000
+      vertex 2.000000e+000 -2.000000e+000 -2.000000e+000
     endloop
   endfacet
   facet normal 0.000000e+000 0.000000e+000 -1.000000e+000
@@ -15,15 +15,15 @@ solid ascii Cube
   endfacet
   facet normal 1.000000e+000 0.000000e+000 0.000000e+000
     outer loop
-      vertex 2.000000e+000 2.000000e+000 -2.000000e+000
       vertex 2.000000e+000 -2.000000e+000 -2.000000e+000
+      vertex 2.000000e+000 2.000000e+000 -2.000000e+000
       vertex 2.000000e+000 -2.000000e+000 2.000000e+000
     endloop
   endfacet
   facet normal 1.000000e+000 0.000000e+000 0.000000e+000
     outer loop
-      vertex 2.000000e+000 2.000000e+000 2.000000e+000
       vertex 2.000000e+000 2.000000e+000 -2.000000e+000
+      vertex 2.000000e+000 2.000000e+000 2.000000e+000
       vertex 2.000000e+000 -2.000000e+000 2.000000e+000
     endloop
   endfacet
