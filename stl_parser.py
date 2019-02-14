@@ -4,17 +4,18 @@ import re
 def avg_(loop):
 	new = []
 	for i in range(3):
-		new.append(sum([x.coordinates[i] for x in loop])/3)
+		new.append(sum([x.coordinates[i] for x in loop]) / 3)
 	return new
 
 
 class Vertex:
 	def __init__(self, coordinates):
 		def float_(significand, exponent):
-			return float(significand)*10**(int(exponent)-1)
+			return float(significand) * 10**(int(exponent) - 1)
 
 		matches = rx_dict["float"].finditer(coordinates)
-		self.coordinates = [float_(i.group("significand"), i.group("exponent")) for i in matches]
+		self.coordinates = [float_(i.group("significand"), i.group("exponent"))
+				for i in matches]
 
 	def __call__(self):
 		return self.coordinates
@@ -29,9 +30,7 @@ class Facet:
 		self.normal = Vertex(rx_dict["vertex"].search(normal).group("vertex"))
 		matches = rx_dict["vertex"].finditer(loop)
 		self.loop = [Vertex(i.group("vertex")) for i in matches]
-		#[[1, 1, 1], [1, 1, 1], [1, 1, 1]]
 		self.center = avg_(self.loop)
-
 
 	def __call__(self):
 		list_ = [i() for i in self.loop]
@@ -60,10 +59,9 @@ class Solid:
 
 	def __call__(self):
 		return [i() for i in self.facets]
-		#return [list(i) for i in self.facets]
 
 
-rx_dict = { # strings for parsing stl files
+rx_dict = {  # strings for parsing stl files
 	"solid": re.compile(r"solid ascii (?P<name>.*)\n"
 		+ r"(\s*facet.*\n(\s*vertex.*\n)*\s*endfacet\n)*"),
 	"facet": re.compile(r"\s*facet (?P<normal>normal .*)\n\s*outer loop"
@@ -76,7 +74,8 @@ rx_dict = { # strings for parsing stl files
 
 def parse(str):
 	return Solid(str)()
-	
+
+
 if __name__ == "__main__":
 	with open("Nova mapa/cube.stl", "r") as f:
 		print(Solid(f.read())())

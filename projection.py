@@ -4,27 +4,14 @@ import numpy as np
 import math
 
 
-def mag(vector): # returns magnitude
+def mag(vector):  # returns magnitude
 	return(sqrt(vector.dot(vector)))
+
 
 sqrt = np.sqrt
 sin = math.sin
 cos = math.cos
 acos = np.arccos
-
-class Rotation:
-	def __init__(self, u, v, w, degrees=True):
-		if degrees:
-			self.u = math.radians(u)
-			self.v = math.radians(v)
-			self.w = math.radians(w)
-		else:
-			self.u = u
-			self.v = v
-			self.w = w
-
-	def __call__(self):
-		pass
 
 
 class Camera:
@@ -48,31 +35,32 @@ class Camera:
 		phi = self.phi
 		# u, v and w are transposed, because it is easier to describe matrix
 		# as a collection of basis vectors.
-		self.r = np.array([[cos(phi), sin(phi), 0], [-sin(phi), cos(phi), 0], [0, 0, 1]) \
-		.dot(np.array([[cos(theta), 0, -sin(theta)] [0, 1, 0] [sin(theta), 0, cos(theta)]])) \
-		.dot(np.array([[1, 0, 0], [0, cos(psi), sin(psi)], [0, -sin(psi), cos(psi)]]))
+		self.r = np.array([
+				[cos(phi), sin(phi), 0],
+				[-sin(phi), cos(phi), 0],
+				[0, 0, 1]
+			]).dot(np.array([
+				[cos(theta), 0, -sin(theta)],
+				[0, 1, 0],
+				[sin(theta), 0, cos(theta)]
+			])).dot(np.array([
+				[1, 0, 0],
+				[0, cos(psi), sin(psi)],
+				[0, -sin(psi), cos(psi)]
+			]))
 
 	def projection(self, point):
-		"""Returns input vector relative to the camera, projected onto 2d plane.
+		"""Returns input vector relative to the camera,
+		projected onto 2d plane.
 		a = input vector - camera vector
 		b = 2d output vector
 		"""
 		a = point - np.array([self.x, self.y, self.z])
 		d = a.dot(self.r)
-		b = np.array([self.ez*d[0]/d[2], -self.ez*d[1]/d[2]])
+		b = np.array([self.ez * d[0] / d[2], -self.ez * d[1] / d[2]])
 		return b
 
 	def normal(self, normal, face):
 		p = np.array(normal).dot(self.r)
-		q = np.array(np.array([self.x, self.y, self.z])-face).dot(self.r)
-		return acos(p.dot(q)/(mag(p)*mag(q)))*2/np.pi
-
-
-class Face:
-	def __init__(self, ver1, ver2, ver3, normal):
-		self.loop = np.array([ver1, ver2, ver3])
-
-	def project(self, camera):
-		for i in self.loop:
-			camera.projection(i)
-
+		q = np.array(np.array([self.x, self.y, self.z]) - face).dot(self.r)
+		return acos(p.dot(q) / (mag(p) * mag(q))) * 2 / np.pi
