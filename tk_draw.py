@@ -8,13 +8,6 @@ import projection
 import stl_parser as parser
 
 
-def circle(array, canvas):
-	canvas.create_oval(
-		50 * array[0] + 249, 50 * array[1] + 249,
-		50 * array[0] + 251, 50 * array[1] + 251,
-		fill="blue")
-
-
 def project_line(camera, point1, point2):
 	return [camera.projection(i) for i in [point1, point2]]
 
