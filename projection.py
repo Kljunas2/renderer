@@ -33,19 +33,17 @@ class Camera:
 		psi = self.psi
 		theta = self.theta
 		phi = self.phi
-		# u, v and w are transposed, because it is easier to describe matrix
-		# as a collection of basis vectors.
 		self.r = np.array([
-				[cos(phi), sin(phi), 0],
+				[ cos(phi), sin(phi), 0],
 				[-sin(phi), cos(phi), 0],
-				[0, 0, 1]
+				[ 0,        0,        1]
 			]).dot(np.array([
 				[cos(theta), 0, -sin(theta)],
-				[0, 1, 0],
-				[sin(theta), 0, cos(theta)]
+				[0,          1,  0         ],
+				[sin(theta), 0,  cos(theta)]
 			])).dot(np.array([
-				[1, 0, 0],
-				[0, cos(psi), sin(psi)],
+				[1,  0,        0       ],
+				[0,  cos(psi), sin(psi)],
 				[0, -sin(psi), cos(psi)]
 			]))
 
